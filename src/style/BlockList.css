@@ -1,0 +1,52 @@
+#root{
+    background-color:white;
+    border-radius: 10px; 
+}
+.block-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+.block {
+    width: 300px;
+    margin: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #00000017;
+    border-radius: 20px;
+}
+
+.block-image {
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    height: 200px;
+    border-radius: 5px;
+}
+  
+.block-description {
+    margin: 5px;
+    justify-content: center;
+    font-size: 16px;
+}
+  
+.block-button {
+    margin: 25px;
+    width: 80%;
+    padding: 10px 10px;
+    background-color: rgb(123,145,86,1);
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+  
+  .block-button:hover {
+    background-color: #23527c;
+  }
+  
+  .block-button:focus {
+    outline: none;
+  }
+  
+  

@@ -33,8 +33,8 @@ function WeekDay({ day, activities }) {
                             </Col>
                             <Col xs={6} md={6} className='d-flex'>
                                 {/* span align vertical */}
-                                <span className="badge bg-primary align-items-right ms-auto">{activity.time}</span>
-                                <Button variant="danger" size="sm">X</Button>
+                                <span className="badge align-items-right ms-auto" style={{backgroundColor:"rgb(123,145,86,1)"}}>{activity.time}</span>
+                                <button class="calendarbtn" size="sm">X</button>
                             </Col>
                         </Row>
                     </li>
@@ -56,12 +56,14 @@ function MyCalendar() {
     function handleDateChange(date) {
         setSelectedDate(date);
     }
-
+    const calendarStyle = {
+        backgroundColor: 'green',
+      };
     return (
         <>
             <NavBar />
             <Container fluid>
-                <Calendar value={selectedDate} onChange={handleDateChange} />
+                <Calendar value={selectedDate} onChange={handleDateChange}/>
                 <h3 className="text-center mt-3">My week: </h3>
                 <WeekList />
             </Container>
