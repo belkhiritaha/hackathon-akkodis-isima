@@ -14,7 +14,6 @@ export default async function (req, res) {
     });
     return;
   }
-
   const userInput = req.body.userInput || '';
   if (userInput.trim().length === 0) {
     res.status(400).json({
@@ -26,16 +25,26 @@ export default async function (req, res) {
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(userInput, req.body.history, req.body.responseHistory),
-      temperature: 0.6,
-      max_tokens: 100,
-    });
-    console.log(req.body.history)
-    console.log(completion.data.choices)
-    res.status(200).json({ result: completion.data.choices[0].text });
-  } catch(error) {
+    const completion = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You're a chatbot designed to give advice on how to reduce daily carbon footprint emissions.",
+              },
+              { role: "user", content: req.body.userInput },
+            ],
+          })
+            .then((res) => {
+                console.log(res.data.choices[0].message.content);
+                msgs.push(res.data.choices[0].message);
+                userInterface.prompt();
+            })
+            console.log(req.body.history)
+            console.log(completion.data.choices)
+            res.status(200).json({ result: completion.data.choices[0].text });
+    } catch(error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -49,9 +58,4 @@ export default async function (req, res) {
       });
     }
   }
-}
-
-function generatePrompt(userInput, history, responseHistory) {
-  return "You're a chatbot designed to give advice on how to reduce daily carbon footprint emission Here's the user's message: " + userInput + "\n" +
-    "Here's the user history: " + history ;
 }
