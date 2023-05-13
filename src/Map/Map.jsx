@@ -1,18 +1,18 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON } from "react-leaflet";
-import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap, GeoJSON, useMapEvents } from "react-leaflet";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import "leaflet/dist/leaflet.css";
 import icon from "../Images/icon.png";
 import L from "leaflet";
 
 function getColor(d) {
-    return d > 300000  ? '#800026' :
-           d > 270000  ? '#BD0026' :
-           d > 235000  ? '#E31A1C' :
-           d > 200000  ? '#FC4E2A' :
-           d > 170000  ? '#FD8D3C' :
-           d > 135000  ? '#FEB24C' :
-           d > 100000   ? '#FED976' :
-                      '#FFEDA0';
+    return d > 300000 ? '#800026' :
+        d > 270000 ? '#BD0026' :
+            d > 235000 ? '#E31A1C' :
+                d > 200000 ? '#FC4E2A' :
+                    d > 170000 ? '#FD8D3C' :
+                        d > 135000 ? '#FEB24C' :
+                            d > 100000 ? '#FED976' :
+                                '#FFEDA0';
 }
 
 function style(feature) {
@@ -26,13 +26,66 @@ function style(feature) {
     };
 }
 
+const center = {
+    lat: 51.505,
+    lng: -0.09,
+  }
+  
+
+function DraggableMarker(props) {
+    const [draggable, setDraggable] = useState(false)
+    const [position, setPosition] = useState(center)
+    const markerRef = useRef(null)
+    const eventHandlers = useMemo(
+        () => ({
+            dragend() {
+                const marker = markerRef.current
+                if (marker != null) {
+                    setPosition(marker.getLatLng())
+                    console.log(marker.getLatLng())
+                }
+            },
+        }),
+        [],
+    )
+    const toggleDraggable = useCallback(() => {
+        setDraggable((d) => !d)
+    }, [])
+
+    return (
+        <Marker
+            draggable={true}
+            eventHandlers={eventHandlers}
+            position={position}
+            icon={props.icon}
+            ref={markerRef}>
+            <Popup minWidth={90}>
+                {/* <span onClick={toggleDraggable}>
+                    {draggable
+                        ? 'Marker is draggable'
+                        : 'Click here to make marker draggable'}
+                </span> */}
+            </Popup>
+        </Marker>
+    )
+}
+
 export default function Map({ coords, display_name }) {
 
     const { latitude, longitude } = coords;
 
+    const [currentCoords, setCurrentCoords] = useState({
+        latitude: 39.7837304,
+        longitude: -100.4458825
+    });
     const [geojsonData, setGeojsonData] = useState(null);
 
+    function handleClick(e) {
+        console.log(e.latlng);
+    }
+
     useEffect(() => {
+        setCurrentCoords(coords);
         // Fetch GeoJSON data from API
         fetch('https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248c5a250173e5148ccb0c368f7d8a63d15&start=8.681495,49.41461&end=8.687872,49.420318')
             .then(response => response.json())
@@ -61,23 +114,29 @@ export default function Map({ coords, display_name }) {
     }
 
     return (
-        <MapContainer
-            classsName="map"
-            center={[latitude, longitude]}
-            zoom={5}
-            scrollWheelZoom={true}
-            style={{ height: "30vh", width: "80%" }}
-        >
-            <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> 
-        contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker icon={customIcon} position={[latitude, longitude]}>
-                <Popup>{display_name}</Popup>
-            </Marker>
-            {geojsonData && <GeoJSON data={geojsonData} />}
-            <MapView />
-        </MapContainer>
+        currentCoords && (
+            <MapContainer
+                classsName="map"
+                center={[latitude, longitude]}
+                zoom={5}
+                scrollWheelZoom={true}
+                style={{ height: "30vh", width: "100%" }}
+                on
+            >
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> 
+                contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker icon={customIcon} position={[latitude, longitude]}>
+                    <Popup>{display_name}</Popup>
+                </Marker>
+                {/* <MarkerMove coords={[latitude, longitude]} customIcon={customIcon} /> */}
+                <DraggableMarker icon={customIcon} />
+                {geojsonData && <GeoJSON data={geojsonData} />}
+                <MapView currentCoords={currentCoords} />
+            </MapContainer>
+        )
+
     );
 }
