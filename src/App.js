@@ -34,15 +34,9 @@ export default function App() {
         // let url = `https://nominatim.openstreetmap.org/reverse?
         // &lat=${coords.latitude}
         // &lon=${coords.longitude}`
-        let url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2" +
-            "&lat=" + coords.latitude + "&lon=" + coords.longitude;
-
+        let url = "http://localhost:8001/api/city?lat=" + coords.latitude + "&lon=" + coords.longitude;
         fetch(url, {
             method: "GET",
-            mode: 'cors',
-            headers: {
-                "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
-            }
         })
             .then((response) => response.json())
             .then((data) => setName(data.display_name));
@@ -80,19 +74,13 @@ export default function App() {
         e.preventDefault();
         console.log(address);
 
-        let url = `https://nominatim.openstreetmap.org/search?
-    street=${address.street}
-    &city=${address.city}
-    &state=${address.state}
-    &country=${address.country}
-    &postalcode=${address.postalcode}&format=json`;
+        let url = `http://localhost:8001/api/coords?street=${address.street}&city=${address.city}&state=${address.state}&country=${address.country}&postalcode=${address.postalcode}&format=json`;
+
+        const urlEncoded = encodeURI(url);
+        console.log(urlEncoded);
 
         fetch(url, {
             method: "POST",
-            mode: "cors",
-            headers: {
-                "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
-            }
         })
             .then((response) => {
                 if (response.ok) {
