@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <Navbar  fixed="top" style={{backgroundColor:"rgb(123,145,86,1)", borderRadius: "7px"}} expand="lg" variant="dark">
       <Container >
-        <Navbar.Brand href="#home" style={{ color: "white" }}>React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home" style={{ color: "white" }}>EcoloBot</Navbar.Brand>
       </Container>
     </Navbar>
   );

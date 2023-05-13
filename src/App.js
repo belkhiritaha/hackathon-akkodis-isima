@@ -128,11 +128,11 @@ export default function App() {
     return (
         <div className="App">
             <NavBar />
-            <Container fluid>
+            <Container fluid style={{borderRadius: "7px", color:"rgb(123,145,86,1)"}}>
                 <h1>Enter The address</h1>
                 <section className="form-container">
                     <form>
-                        <label>street:</label>
+                        <label>Street:</label>
                         <input
                             value={address.street}
                             placeholder="1234 abc street"
@@ -140,7 +140,7 @@ export default function App() {
                             id="street"
                             type="text"
                         />
-                        <label>city:</label>
+                        <label>City:</label>
                         <input
                             placeholder="1234 abc street"
                             type="text"
@@ -157,7 +157,7 @@ export default function App() {
                             onChange={update("state")}
                             id="state"
                         />
-                        <label>zip code:</label>
+                        <label>Zip Code:</label>
                         <input
                             placeholder="91423"
                             type="text"
@@ -176,7 +176,7 @@ export default function App() {
                         />
                         <br />
 
-                        <button onClick={(e) => submitHandler(e)}>Search</button>
+                        <button class="btn">Search</button>
                     </form>
                 </section>
                 <Map coords={coords} display_name={display_name} />

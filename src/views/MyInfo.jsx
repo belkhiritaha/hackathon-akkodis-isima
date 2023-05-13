@@ -30,7 +30,6 @@ const MyInfo = () => {
     return (
         <>
             <NavBar />
-
             <Container fluid>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formAddress">

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { Navbar } from 'react-bootstrap';
 import '../style/ChatBot.css'; // You can define your own CSS styles for the chatbot
+import NavBar from '../UI/Navbarbot';
+import Footer from '../UI/Footer';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -39,8 +42,9 @@ const Chatbot = () => {
     };
     return botResponse;
   };
-
   return (
+    <>
+    <NavBar /> 
     <div className="chatbot">
       <div className="chatbot-container">
         <div className="chatbot-messages">
@@ -61,6 +65,8 @@ const Chatbot = () => {
         </form>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
