@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "leaflet": "1.8.0",
+    "openai": "^3.2.1",
     "react": "18.0.0",
     "react-bootstrap": "^2.7.4",
     "react-calendar": "^4.2.1",
@@ -29,5 +30,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],"type": "module"
 }
