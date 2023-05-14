@@ -7,10 +7,91 @@ import Footer from "./UI/Footer";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 
+function NextCard(props) {
+    const [isOptimized, setIsOptimized] = useState(false);
+
+    useEffect(() => {
+        let cookie = document.cookie;
+        console.log(cookie);
+        let optimized = cookie.split(";").find((item) => item.includes("optimised"));
+        if (optimized) {
+            setIsOptimized(true);
+        }
+    }, []);
+
+    if (isOptimized) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
+                        <div className="card" style={{ width: "18rem", marginBottom: "100px" }}>
+                            <Map coords={props.coords} display_name={props.display_name} />
+                            <div className="card-body">
+                                <Row>
+                                    <Col>
+                                        <h5 className="card-title">This Monday - Work</h5>
+                                        <img src='/images/sunny.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
+                                        <img src='/images/car.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
+                                        <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>2g 🍃 (4.5Km)</span>
+                                    </Col>
+                                    <Col>
+                                        <p className="card-text">Leave at 7h20</p>
+                                        <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>8h - 12h</span>
+                                    </Col>
+                                </Row>
+    
+                                <Row>
+                                    <div className="" style={{}}>
+                                        <span className="badge badge-primary" style={{ marginTop: "10px", backgroundColor: "rgb(123,145,86,1)" }}>🌱 Your schedule is eco-friendly</span>
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-sm">
+                    <div className="card" style={{ width: "18rem", marginBottom: "100px" }}>
+                        <Map coords={props.coords} display_name={props.display_name} />
+                        <div className="card-body">
+                            <Row>
+                                <Col>
+                                    <h5 className="card-title">This Monday - Work</h5>
+                                    <img src='/images/sunny.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
+                                    <img src='/images/car.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
+                                    <span className="badge bg-danger badge-primary">2g 🍃 (5.5Km)</span>
+                                </Col>
+                                <Col>
+                                    <p className="card-text">Leave at 7h40</p>
+                                    <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>8h - 12h</span>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <div className="" style={{}}>
+                                    <span className="badge bg-danger badge-primary" style={{ marginTop: "10px" }}>🚨 Your schedule is not eco-friendly</span>
+                                </div>
+                            </Row>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+
 export default function App() {
     const [coords, setCorrds] = useState({
-        latitude: 39.7837304,
-        longitude: -100.4458825
+        latitude: 45.77547359736413,
+        longitude: 3.085100043372467
     });
     const [display_name, setName] = useState("");
 
@@ -26,10 +107,10 @@ export default function App() {
     };
 
     function getCurrentCityName(position) {
-        setCorrds({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        });
+        // setCorrds({
+        //     latitude: position.coords.latitude,
+        //     longitude: position.coords.longitude
+        // });
 
         // let url = `https://nominatim.openstreetmap.org/reverse?
         // &lat=${coords.latitude}
@@ -116,8 +197,8 @@ export default function App() {
     return (
         <div className="App">
             <NavBar />
-            <Container fluid style={{borderRadius: "7px", color:"rgb(123,145,86,1)"}}>
-                <h1>Enter The address</h1>
+            <Container fluid style={{ borderRadius: "7px", color: "rgb(123,145,86,1)", marginTop: "100px" }}>
+                {/* <h1>Enter The address</h1>
                 <section className="form-container">
                     <form>
                         <label>Street:</label>
@@ -166,8 +247,22 @@ export default function App() {
 
                         <button class="btn">Search</button>
                     </form>
-                </section>
-                <Map coords={coords} display_name={display_name} />
+                </section> */}
+
+                {/* centered logo */}
+                <Row className="justify-content-md-center">
+                    <Col xs lg="2">
+                        <img src="/images/hand.png" alt="logo" style={{ width: "100px", height: "100px", marginLeft: "auto", marginRight: "auto", display: "block" }} />
+                    </Col>
+                </Row>
+
+                <h1 style={{ color: "rgb(123,145,86,1)", marginTop: "20px" }}>Hello, Taha RatéLeBus 👋</h1>
+
+                <h3 className="text-muted">Your next scheduled departure</h3>
+                <div className="container">
+                    <NextCard coords={coords} display_name={display_name} />
+                </div>
+
                 <Footer />
             </Container>
         </div>

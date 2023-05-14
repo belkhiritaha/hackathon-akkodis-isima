@@ -27,8 +27,8 @@ function style(feature) {
 }
 
 const center = {
-    lat: 51.505,
-    lng: -0.09,
+    lat: 45.757340578158875,
+    lng: 3.1332783632223067
   }
   
 
@@ -54,18 +54,11 @@ function DraggableMarker(props) {
 
     return (
         <Marker
-            draggable={true}
+            draggable={false}
             eventHandlers={eventHandlers}
             position={position}
             icon={props.icon}
             ref={markerRef}>
-            <Popup minWidth={90}>
-                {/* <span onClick={toggleDraggable}>
-                    {draggable
-                        ? 'Marker is draggable'
-                        : 'Click here to make marker draggable'}
-                </span> */}
-            </Popup>
         </Marker>
     )
 }
@@ -86,8 +79,8 @@ export default function Map({ coords, display_name }) {
 
     useEffect(() => {
         setCurrentCoords(coords);
-        // Fetch GeoJSON data from API
-        fetch('https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248c5a250173e5148ccb0c368f7d8a63d15&start=8.681495,49.41461&end=8.687872,49.420318')
+        // Fetch GeoJSON data from API                                                                                                                                      
+        fetch('https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248c5a250173e5148ccb0c368f7d8a63d15&start=3.0851,45.7754&end=3.133,45.757')
             .then(response => response.json())
             .then(data => {
                 setGeojsonData(data);
@@ -118,9 +111,9 @@ export default function Map({ coords, display_name }) {
             <MapContainer
                 classsName="map"
                 center={[latitude, longitude]}
-                zoom={5}
+                zoom={15}
                 scrollWheelZoom={true}
-                style={{ height: "30vh", width: "100%" }}
+                style={{ height: "40vh", width: "100%" }}
                 on
             >
                 <TileLayer

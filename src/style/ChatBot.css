@@ -54,7 +54,7 @@
     flex-grow: 1;
     padding: 8px;
     border: none;
-    border-radius: 3px;
+    border-radius: 30px;
   }
   
   .chatbot-form button {
