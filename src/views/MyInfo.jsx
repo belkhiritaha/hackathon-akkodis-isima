@@ -35,13 +35,13 @@ const MyInfo = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="profile-img text-center mt-5">
-                            <img src="/images/profile.png" alt="user" className="user-image" style={{ width: "100px", height: "100px", borderRadius: "50%", marginTop: "30px" }} />
+                            <img src="/images/profil_vert.png" alt="user" className="user-image" style={{ width: "100px", height: "100px", borderRadius: "50%", marginTop: "30px" }} />
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12 text-center">
-                            <h3 className='text-center'>Taha RatéLeBus</h3>
+                            <h3 className='text-center' style={{ color: "#169585"}}>Taha RatéLeBus</h3>
                     </div>
                 </div>
                 <hr />
@@ -79,7 +79,7 @@ const MyInfo = () => {
                     <div className='row'>
                         <div className='col-md-12'>
                             <span className='text-center text-muted'>Add more addresses</span>
-                            <button className='btn btn-primary btn-block' style={{width: "10%"}}>+</button>
+                            <button className='btn btn-primary btn-block' style={{width: "10%", backgroundColor: "#169585"}}>+</button>
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@ const MyInfo = () => {
                         </Form.Control>
                     </Form.Group>
 
-                    <Button variant="primary" type="submit" style={{ marginBottom: "100px" }}>
+                    <Button variant="primary" type="submit" style={{ marginBottom: "100px", backgroundColor: "#169585" }}>
                         Submit
                     </Button>
                 </Form>

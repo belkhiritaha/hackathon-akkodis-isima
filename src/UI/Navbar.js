@@ -18,9 +18,9 @@ function NavBar() {
     }, []);
 
   return (
-    <Navbar  fixed="top" style={{backgroundColor:"rgb(123,145,86,1)", borderRadius: "7px"}} expand="lg" variant="dark">
+    <Navbar  fixed="top" style={{backgroundColor:"rgb(123,145,86,1)"}} expand="lg" variant="dark">
       <Container >
-        <Navbar.Brand href="#home" style={{ color: "white" }}>NOM DE L'APP</Navbar.Brand>
+        <Navbar.Brand href="/" style={{ color: "white" }}><img src="/images/logo.png" style={{ height: "40px", width: "40px", borderRadius: "50%", marginRight: '10px' }}/><b>EcoMove</b></Navbar.Brand>
         { // coins counter to the right 
         }
         <span style={{ color: "white", fontSize: "20px" }}> {coins} 🍃</span>

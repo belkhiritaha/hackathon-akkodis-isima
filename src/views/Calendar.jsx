@@ -11,6 +11,7 @@ import NavBar from '../UI/Navbar';
 import Footer from '../UI/Footer';
 import { createPath } from 'react-router-dom';
 
+import Confetti from 'react-confetti';
 
 function WeekList() {
     return (
@@ -57,10 +58,10 @@ function WeekDay({ day, activities }) {
                                     {
                                             <img src={`/images/${activity.transport}.png`} alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
                                     }
-                                    <span className="badge align-items-right ms-auto" style={{backgroundColor:"rgb(123,145,86,1)", marginLeft: "10px"}}>
+                                    <span className="badge align-items-right ms-auto" style={{backgroundColor:"#169585", marginLeft: "10px"}}>
                                         {activity.time}
                                     </span>
-                                    <button class="calendarbtn" size="sm" style={{ width: "30px", height: "30px", marginLeft: "10px" }}>+</button>
+                                        <button class="calendarbtn" size="sm" style={{ width: "30px", height: "30px", marginLeft: "10px" }}>+</button>
                                 </div>
                             </Col>
                         </Row>
@@ -81,6 +82,7 @@ function MyCalendar() {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [isLoading, setisLoading] = useState(false);
     const [optimised, setOptimised] = useState(false);
+    const [confettiActive, setConfettiActive] = useState(true);
 
     useEffect(() => {
         // check if cookie exists
@@ -90,6 +92,9 @@ function MyCalendar() {
                 setOptimised(true);
             }
         }
+        setTimeout(() => {
+            setConfettiActive(false);
+        }, 3000);
     }, []);
 
     function handleDateChange(date) {
@@ -145,10 +150,15 @@ function MyCalendar() {
                     <Calendar value={selectedDate} onChange={handleDateChange}/>
                     <h3 className="text-center mt-3">My week: </h3>
                     <OptimizedWeekList />
+                    {
+                        confettiActive && (
+                        <Confetti width={window.innerWidth} height={window.innerHeight} style={{position: "absolute", top: 0, left: 0, zIndex: 100}} gravity={0.2} tweenDuration={2000} run={confettiActive}/>
+                    ) 
+                    }
 
                     <div className="d-flex justify-content-center">
-                        <div className="border border-success rounded p-3 mt-3" style={{width: "50%"}}>
-                            <span className="text-success">You're only emitting 7 grams of CO2 this week!</span>
+                        <div className="border border-success rounded p-3 mt-3" style={{width: "50%", backgroundColor: "rgb(123,145,86,1)", color: "white"}}>
+                            <span className="h6">You're only emitting 1.8Kg of CO2 this week! 🎉🎉🥳🥳</span>
                         </div>
                     </div>
                 </Container>
@@ -161,6 +171,7 @@ function MyCalendar() {
 
     return (
         <>
+            <canvas class="confetti" id="canvas"></canvas>
             <NavBar />
             <Container fluid>
                 <Calendar value={selectedDate} onChange={handleDateChange}/>
@@ -169,7 +180,7 @@ function MyCalendar() {
 
                 <div className="d-flex justify-content-center">
                     <div className="border border-danger rounded p-3 mt-3" style={{width: "50%"}}>
-                        <span className="text-danger">You're emitting 12 grams of CO2 this week!</span>
+                        <span className="text-danger">You're emitting 5.8Kg of CO2 this week!</span>
                     </div>
                 </div>
                 <div className="d-flex justify-content-center">

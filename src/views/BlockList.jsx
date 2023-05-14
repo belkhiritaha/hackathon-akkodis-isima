@@ -71,7 +71,7 @@ const BlockList = ({ }) => {
                 <NavBar />
                 <div className="block-list" style={{ marginTop: "100px", marginBottom: "100px" }}>
                     <div className="container fluid">
-                        <h1 style={{ color: "rgb(123,145,86,1)" }}>Nos partenaires</h1>
+                        <h1 style={{ color: "#169585" }}>Nos partenaires</h1>
                     </div>
                     {blocks.map((block, index) => (
                         <div key={index} className="block">

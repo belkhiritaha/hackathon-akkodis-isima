@@ -75,7 +75,7 @@ const Chatbot = () => {
                             value={inputValue}
                             onChange={handleInputChange}
                         />
-                        <button type="submit">Send</button>
+                        <button type="submit" style={{ backgroundColor: "#169585"}}>Send</button>
                     </form>
                 </div>
             </div>

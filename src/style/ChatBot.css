@@ -37,11 +37,11 @@
   }
   
   .user-message {
-    background-color: #dcf8c6;
+    background-color: #1695846e;
   }
   
   .bot-message {
-    background-color: #f0f0f0;
+    background-color: #dcf8c6;
   }
   
   .chatbot-form {
@@ -74,8 +74,8 @@
   .chatbot-form button:focus {
     outline: none;
   }
-  .navbar {
+  /* .navbar {
     background-color: rgb(123,145,86,1);
     border-radius: 7px;
     color : white;
-  }
+  } */

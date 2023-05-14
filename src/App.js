@@ -29,14 +29,14 @@ function NextCard(props) {
                             <div className="card-body">
                                 <Row>
                                     <Col>
-                                        <h5 className="card-title">This Monday - Work</h5>
+                                        <h5 className="card-title" style={{ color: "#169585"}}>This Monday - Work</h5>
                                         <img src='/images/sunny.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
                                         <img src='/images/car.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
                                         <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>2g 🍃 (4.5Km)</span>
                                     </Col>
                                     <Col>
-                                        <p className="card-text">Leave at 7h20</p>
-                                        <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>8h - 12h</span>
+                                        <p className="card-text" style={{ color: "#169585" }}>Leave at 7h20</p>
+                                        <span className="badge badge-primary" style={{ backgroundColor: "#169585" }}>8h - 12h</span>
                                     </Col>
                                 </Row>
     
@@ -63,14 +63,14 @@ function NextCard(props) {
                         <div className="card-body">
                             <Row>
                                 <Col>
-                                    <h5 className="card-title">This Monday - Work</h5>
+                                    <h5 className="card-title" style={{ color: "#169585"}}>This Monday - Work</h5>
                                     <img src='/images/sunny.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
                                     <img src='/images/car.png' alt="transportation" className="transport-icon" style={{ height: "30px", width: "30px", marginRight: "10px" }} />
                                     <span className="badge bg-danger badge-primary">2g 🍃 (5.5Km)</span>
                                 </Col>
                                 <Col>
-                                    <p className="card-text">Leave at 7h40</p>
-                                    <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>8h - 12h</span>
+                                    <p className="card-text" style={{ color: "#169585"}}>Leave at 7h40</p>
+                                    <span className="badge badge-primary" style={{ backgroundColor: "#169585" }}>8h - 12h</span>
                                 </Col>
                             </Row>
 
@@ -250,13 +250,13 @@ export default function App() {
                 </section> */}
 
                 {/* centered logo */}
-                <Row className="justify-content-md-center">
+                {/* <Row className="justify-content-md-center">
                     <Col xs lg="2">
-                        <img src="/images/hand.png" alt="logo" style={{ width: "100px", height: "100px", marginLeft: "auto", marginRight: "auto", display: "block" }} />
+                        <img src="/images/logo.png" alt="logo" style={{ width: "200px", height: "200px", marginLeft: "auto", marginRight: "auto", display: "block", borderRadius: "70px" }} />
                     </Col>
-                </Row>
+                </Row> */}
 
-                <h1 style={{ color: "rgb(123,145,86,1)", marginTop: "20px" }}>Hello, Taha RatéLeBus 👋</h1>
+                <h1 style={{ color: "#169585", marginTop: "20px" }}>Hello, Taha RatéLeBus 👋</h1>
 
                 <h3 className="text-muted">Your next scheduled departure</h3>
                 <div className="container">
