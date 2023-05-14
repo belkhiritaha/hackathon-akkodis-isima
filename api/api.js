@@ -5,7 +5,8 @@ const fs = require('fs');
 
 const mongoose = require('mongoose')
 const User = require("./user.models")
-const VM = require("./activities.models")
+const VM = require("./activities.models");
+const { default: Gen_message } = require("./prompt");
 
 // ########### API SETUP ###########
 app.listen(8001, () => {
@@ -247,6 +248,13 @@ app.get("/api/weather", (req, res) => {
             res.status(400).json({ error })
         });
 })
+
+api.post("api/chatbot",(req,res)=>{
+    const usermessage=req.body.usermessage;
+    const history= req.body.historymessage; 
+    const response= Gen_message(usermessage, history).then((ress)=>{
+        console.log(ress);})
+    })
 // ########### JWT SETUP ###########
 
 // Generate new cookie object and save it in database

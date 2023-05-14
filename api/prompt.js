@@ -28,10 +28,7 @@ const userInterface = readline.createInterface({
 
 
 
-userInterface.prompt();
-let msgs= []
-userInterface.on("line", async (input) => {
-    msgs.push({ role: "user", content: input });
+export default async function (input){
     await openai
     .createChatCompletion({
         model: "gpt-3.5-turbo",
@@ -41,16 +38,16 @@ userInterface.on("line", async (input) => {
             content:
               "You're a chatbot designed to give advice on how to reduce daily carbon footprint emissions.",
           },
-          ...msgs,
+          ...input,
         ],
       })
         .then((res) => {
             console.log(res.data.choices[0].message.content);
-            msgs.push(res.data.choices[0].message);
-            userInterface.prompt();
+            return 
         })
         .catch((e) => {
             console.log(e);
+            return (e)
         });
-})
+    }
 

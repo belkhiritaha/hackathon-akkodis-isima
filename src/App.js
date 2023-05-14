@@ -39,7 +39,7 @@ function NextCard(props) {
                                         <span className="badge badge-primary" style={{ backgroundColor: "rgb(123,145,86,1)" }}>8h - 12h</span>
                                     </Col>
                                 </Row>
-    
+
                                 <Row>
                                     <div className="" style={{}}>
                                         <span className="badge badge-primary" style={{ marginTop: "10px", backgroundColor: "rgb(123,145,86,1)" }}>🌱 Your schedule is eco-friendly</span>
@@ -105,6 +105,16 @@ export default function App() {
         maximumAge: 30000,
         timeout: 27000
     };
+    function getBotResponse(inputValue) {
+        let url = `http://localhost:8001/api/chatbot`;
+        console.log(inputValue)
+        fetch(url, { method: "POST", body: inputValue.json()}).then((response)=>{if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Something went wrong')}).then((data) => {
+            console.log(data)
+        })
+    }
 
     function getCurrentCityName(position) {
         // setCorrds({

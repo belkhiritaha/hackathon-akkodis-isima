@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function (req, res) {
+export default async function Gen_message(req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -26,25 +26,20 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            messages: [
-              {
-                role: "system",
-                content:
-                  "You're a chatbot designed to give advice on how to reduce daily carbon footprint emissions.",
-              },
-              { role: "user", content: req.body.userInput },
-            ],
-          })
-            .then((res) => {
-                console.log(res.data.choices[0].message.content);
-                msgs.push(res.data.choices[0].message);
-                userInterface.prompt();
-            })
-            console.log(req.body.history)
-            console.log(completion.data.choices)
-            res.status(200).json({ result: completion.data.choices[0].text });
-    } catch(error) {
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You're a chatbot designed to give advice on how to reduce daily carbon footprint emissions.",
+        },
+        ...req.body,
+      ],
+    })
+    console.log(req.body.history)
+    console.log(completion.data.choices)
+    res.status(200).json({ result: completion.data.choices[0].text });
+  } catch (error) {
     // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
